@@ -1,0 +1,39 @@
+version: '3'
+services:
+    # my-app:
+    #     build:
+    #         context: . # where dockerfile resides (local dir or git repo path)
+    #         dockerfile: ./dockerfile
+    #         image: myapp:1.0
+    #     ports:
+    #         - 3000:3000
+    mongodb:
+        image: mongo
+        restart: always
+        ports:
+            - 27017:27017
+        networks:
+            - mongo-net
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=admin
+            - MONGO_INITDB_ROOT_PASSWORD=password
+        volumes:
+            - db-data:/var/lib/mysql/data
+    my-mongo-express:
+        image: mongo-express
+        restart: always
+        ports:
+            - 8081:8081
+        networks:
+            - mongo-net
+        environment:
+            - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+            - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+            - ME_CONFIG_MONGODB_SERVER=mongodb
+
+volumes:
+    db-data:
+        driver: local
+
+networks:
+    mongo-net:
