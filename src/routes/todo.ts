@@ -5,13 +5,15 @@ import Todo from "../models/todo";
 
 const router = express.Router();
 
-// GET
+// GET 
 router.get("/api/todo", async (req, res) => {
     console.log("get all");
     await connectMongoDb();
     const all = await Todo.find({});
     await closeConnection();
 
+    // no need to return and shouldn't.
+    // instead, call next() after this line if you want other handler to process this request.
     return res.status(StatusCodes.OK).json(all); //.send(all);
 });
 
@@ -25,7 +27,7 @@ router.get("/api/todo/:id", async (req, res) => {
 });
 
 // POST
-router.post("/api/todo", async (req, res) => {
+router.post("/api/todo", async (req, res, next) => {
     const { title, description } = req.body;
     console.log("post ...")
 
@@ -48,6 +50,7 @@ router.post("/api/todo", async (req, res) => {
     } catch (e) {
         if (e instanceof Error) {
             console.error(e);
+            next();
         }
     }
 });

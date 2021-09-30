@@ -17,6 +17,7 @@ export const connectMongoDb = async () => {
             useUnifiedTopology: true,
         });
 
+        // database: "mydb"
         db = mongoose.connection.db;
 
         console.log(`environment: ${process.env.NODE_ENV}`);
