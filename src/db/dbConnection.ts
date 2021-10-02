@@ -5,13 +5,13 @@ var mongoose: any; //  = new Mongoose();
 var db: any;
 
 export const connectMongoDb = async () => {
-    require("dotenv").config;
+    // require("dotenv").config;
     mongoose = require("mongoose");
 
     try {
         // "mongodb://admin:password@localhost:27017/test",
-        // 'mongodb+srv://admin:Thisisawesome@cluster-tryme.yjjgh.mongodb.net/mydb?retryWrites=true&w=majority',
-        await mongoose.connect(process.env.MONGODB_ATLAS_URI!, {
+        // "mongodb+srv://admin:Thisisawesome@cluster-tryme.yjjgh.mongodb.net/mydb?retryWrites=true&w=majority",
+        await mongoose.connect(process.env.MONGODB_URI!, {
             connectTimeoutMS: 5000,
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -21,7 +21,7 @@ export const connectMongoDb = async () => {
         db = mongoose.connection.db;
 
         console.log(`environment: ${process.env.NODE_ENV}`);
-        if (process.env.NODE_ENV !== 'production') {
+        if (process.env.NODE_ENV !== "production") {
             console.info("mongodb connected.");
             console.info(
                 `database: ${db.databaseName}. connection state: ${mongoose.STATES[mongoose.connection.readyState]}`

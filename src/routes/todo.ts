@@ -1,11 +1,11 @@
 import express from "express";
 import { StatusCodes } from "http-status-codes";
-import { connectMongoDb, closeConnection } from "../db/dbConntion";
+import { connectMongoDb, closeConnection } from "../db/dbConnection";
 import Todo from "../models/todo";
 
 const router = express.Router();
 
-// GET 
+// GET
 router.get("/api/todo", async (req, res) => {
     console.log("get all");
     await connectMongoDb();
@@ -29,7 +29,7 @@ router.get("/api/todo/:id", async (req, res) => {
 // POST
 router.post("/api/todo", async (req, res, next) => {
     const { title, description } = req.body;
-    console.log("post ...")
+    console.log("post ...");
 
     try {
         await connectMongoDb();

@@ -36,7 +36,7 @@ const Todo = Mongoose.model<TodoDoc, TodoModelInterface>("todo", todoSchema);
 
 // https://mongoosejs.com/docs/guide.html#statics
 // doesn't seem to work!?
-todoSchema.statics.build = function(attr: ITodo) {
+todoSchema.statics.build = function (attr: ITodo) {
     return new Todo(attr);
 };
 

@@ -15,6 +15,7 @@ export interface IUser {
 
 export interface UserModelInterface extends Model<IUser> {
     // addition query methods go here
+    validatePassword(password: string) : boolean;
 }
 
 const userSchema = new Schema<IUser, UserModelInterface>({

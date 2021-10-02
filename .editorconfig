@@ -15,11 +15,12 @@ max_line_length = 120
 # indent_size = 4
 # max_line_length = 80
 
-[*.html]
+[*.{css,html}]
 indent_size = 2
 
 # The JSON files contain newlines inconsistently
 [*.json]
+indent_size = 2
 insert_final_newline = ignore
 
 # Minified JavaScript files shouldn't be changed
@@ -32,7 +33,7 @@ insert_final_newline = ignore
 indent_style = tab
 
 # Batch files use tabs for indentation
-[*.bat]
+[*.{bat,cmd}]
 indent_style = tab
 
 [*.md]
