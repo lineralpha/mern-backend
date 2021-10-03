@@ -5,7 +5,6 @@ var mongoose: any; //  = new Mongoose();
 var db: any;
 
 export const connectMongoDb = async () => {
-    // require("dotenv").config;
     mongoose = require("mongoose");
 
     try {

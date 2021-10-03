@@ -1,5 +1,6 @@
 import express from "express";
 import { StatusCodes } from "http-status-codes";
+// This import is required to make the ts compiler happy
 import session from "../types/express-session-augment";
 
 const router = express.Router();

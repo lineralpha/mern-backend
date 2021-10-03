@@ -6,8 +6,6 @@ if (fs.existsSync(".env")) {
 }
 
 if (fs.existsSync(".env.development")) {
-    // dotenv.config({path: ".env.development"});
-
     // Override environment variables
     let envConfig = dotenv.parse(fs.readFileSync(".env.development"));
     for (const k in envConfig) {

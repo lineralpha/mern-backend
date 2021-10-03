@@ -32,7 +32,7 @@ export interface TodoModelInterface extends Mongoose.Model<TodoDoc> {
 }
 
 // 3. define the model.
-const Todo = Mongoose.model<TodoDoc, TodoModelInterface>("todo", todoSchema);
+const Todo = Mongoose.model<TodoDoc, TodoModelInterface>("Todo", todoSchema);
 
 // https://mongoosejs.com/docs/guide.html#statics
 // doesn't seem to work!?

@@ -14,8 +14,8 @@ import { homeRouter } from "./routes/home";
 import { todoRouter } from "./routes/todo";
 
 // for authentication
-import User from "./models/User";
-import { genPassword, validatePassword } from "./utils/passwordUtil";
+import "./config/passport";
+import { userLoginRouter } from "./routes/userLogin";
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -41,38 +41,19 @@ app.use(compression())
     )
     .use(passport.initialize())
     .use(passport.session())
+    // for debugging purpose
+    .use((req, res, next) => {
+        console.log(req.session);
+        console.log(req.user);
+        next();
+    })
     .use(helmet())
     .use(cors())
     .use(apiRateLimiter);
 
 // add all routers
-app.use(homeRouter).use(todoRouter);
-
-app.post(
-    "/api/login",
-    passport.authenticate("local", { failureRedirect: "/login-failure", successRedirect: "/login-success" }),
-    async (req, res, next) => {
-        // with these redirections, we don't have to do anything here
-    }
-);
-
-app.post("api/register", async (req, res, next) => {
-    const saltHash = genPassword(req.body.passwd);
-    const salt = saltHash.salt;
-    const hash = saltHash.hash;
-
-    const newUser = new User({
-        username: req.body.uname,
-        password: hash,
-        salt: salt,
-    });
-
-    newUser.save();
-});
-
-app.get("/api/logout", async (req, res, next) => {
-    req.logout();
-    res.redirect("/success-logout");
-});
+app.use(homeRouter)
+    .use(userLoginRouter)
+    .use(todoRouter);
 
 export default app;

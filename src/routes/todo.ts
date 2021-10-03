@@ -50,7 +50,7 @@ router.post("/api/todo", async (req, res, next) => {
     } catch (e) {
         if (e instanceof Error) {
             console.error(e);
-            next();
+            next(e);
         }
     }
 });

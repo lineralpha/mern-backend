@@ -63,7 +63,7 @@ function gracefullyExit() {
     });
 }
 
-// unused. do not remove
+// unused. do not remove for now
 async function connectMongoDbServer() {
     const mongoose = require("mongoose");
 
